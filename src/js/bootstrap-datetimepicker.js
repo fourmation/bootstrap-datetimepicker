@@ -286,6 +286,11 @@ THE SOFTWARE.
         },
 
         place = function () {
+
+            if (picker.options.appendTo != defaults.appendTo) {
+                return;
+            }
+
             var position = 'absolute',
                 offset = picker.component ? picker.component.offset() : picker.element.offset(),
                 $window = $(window),
@@ -461,7 +466,7 @@ THE SOFTWARE.
 
             nextMonth = moment(prevMonth).add(42, 'd');
             while (prevMonth.isBefore(nextMonth)) {
-                if (prevMonth.weekday() === moment().zone(0).startOf('week').weekday()) {
+                if (prevMonth.weekday() === pMoment().zone(0).startOf('week').weekday()) {
                     row = $('<tr>');
                     html.push(row);
                     if (picker.options.calendarWeeks === true) {
