@@ -131,12 +131,13 @@ THE SOFTWARE.
                 }
             }
 
-            picker.options.widgetParent =
-                typeof picker.options.widgetParent === 'string' && picker.options.widgetParent ||
+            if (! picker.options.widgetParent ) {
+                picker.options.widgetParent =
                 picker.element.parents().filter(function () {
                     return 'scroll' === $(this).css('overflow-y');
                 }).get(0) ||
-                'body';
+                'body'
+            }
 
             picker.widget = $(getTemplate()).appendTo(picker.options.widgetParent);
 
@@ -287,7 +288,7 @@ THE SOFTWARE.
 
         place = function () {
 
-            if (picker.options.appendTo != defaults.appendTo) {
+            if (picker.options.widgetParent != 'body') {
                 return;
             }
 
